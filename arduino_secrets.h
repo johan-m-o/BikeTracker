@@ -1,0 +1,7 @@
+#define SECRET_PINNUMBER ""
+#define SECRET_PHONENUMBER ""
+#define SECRET_PASSWORD ""
+
+#define SECRET_GPRS_APN ""
+#define SECRET_GPRS_LOGIN ""
+#define SECRET_GPRS_PASSWORD ""
