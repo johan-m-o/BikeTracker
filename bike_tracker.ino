@@ -1,5 +1,5 @@
 /*
-   Bike Tracker v1.2
+   Bike Tracker v2.0
    Copyright (c) 2021 Johan Oscarsson
    Released under the MIT licence
 

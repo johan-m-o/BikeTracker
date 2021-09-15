@@ -1,4 +1,4 @@
-# Bike Tracker v1.2
+# Bike Tracker v2.0
 ## Background
 There are actually plenty of bicycle trackers around, so why make your own? Well, so that it works the way you want it… And it’s fun!
 
@@ -7,24 +7,31 @@ I was looking for a tracker that would let me know if the bike is moving and tha
 So, I needed a microcontroller that I could hook an accelerometer and a GPS to, and that reliably could send me the data gathered from those sensors. A simple SMS seemed like the best way to transmit, and it’s unlikely to stop working in the near future.
 
 ## Future
-With v1.2 of the tracker the software is where I want it to be. The hardware needs some work though... The GPS shield will have to be soldered rather than using the I2C ports, since these have a tendency to disconnect if there's a bump in the road. And, the case (seen below) will have to go, since it can't really be said to hide the tracker very well. I'm planning to instead hide the tracker inside the seat post. Stay tuned.
+Currently I'm satisfied with both hardware and software of the tracker. No changes planned for now...
 
 ## Hardware
-After some research, and trial and error, I ended up with the following hardware:
+After some research (and trial and error) I ended up with the following hardware:
 * Arduino MKR GSM 1400 as the mainboard
-* GSM/GPRS 2dBi internal U.FL antenna
+* GSM/GPRS 3dBi mini antenna (5 cm)
+* SMA to IPX UFL cable (60 cm)
 * ADXL345 3-axis accelerometer
 * Arduino MKR GPS Shield
-* 3.7V 4400mAh Li-Po battery
+* 2 3.7V 2200mAh Li-Po 18650 battery cells
+* 2 single 18650 cell battery holders (taken from 4400mAh battery pack)
+* Li-Po battery control circuit (taken from 4400mAh battery pack)
 * On-off micro switch
 * Sparkfun LiPo charger plus
-* JST PHR-2 connectors
+* Short USB cable (15 cm, USB C male to micro USB female)
+* JST PHR-2 connector
+* Suitable cables
+* Nuts, bolts, screws and various parts for mounting
 
 A note on the charger listed above:
 While testing the hardware I noticed that the MKR GSM board wouldn’t charge the Li-Po batteries I had, and after some further research I concluded that there was either something wrong with the board or that it simply wasn’t compatible with the batteries I had. Since it was functioning otherwise, and that I didn’t want to spend a lot of time investigating further I decided on using an external charging circuit instead and got the Sparkfun charger. If you make something similar and the MKR GSM board charges your battery, this external charger will of course not be necessary.
 
 ## Wiring
 ![Wiring diagram](/images/wiring.png)
+![Closeup of main board](/images/board_closeup.jpg)
 ### MKR GMS 1400
 I couldn’t find the MKR GSM 1400 without the headers (don't think it's even available without), so those had to be desoldered before anything else could be connected to the board. The headers just take up too much space for them to be kept on there.
 
@@ -34,8 +41,12 @@ Pin 10 and the reset pin have been connected so that the board can be reset prog
 
 To save a little bit of battery the power-LED (marked "ON" on the main board, as seen in the diagram above) has been desoldered.
 
+Since the board needs to fit inside the mounting groove on the seat post (see _"Mounting on the bike"_ below) I had to remove the I2C and battery ports. They added to much bulk. Instead, the connectors to battery and GPS module where soldered directly to the board.
+
 ### MKR GPS Shield
-This connects easily through the provided I2C cable and the I2C port on both the main board and the GPS module. No soldering required. The connector uses digital pin 7, and this is used to wake up the GPS board when sleeping.
+Since the I2C port had to be removed (see above) the provided I2C cable could not be used to connect to the GPS shield. But, any other solution would become to bulky to fit. Therefore I chose to simply cut the I2C cable and solder it directly to the main board. Instead of using the regular pins I used the connectors for the old I2C port, which was rather difficult but I chose this route since I could not figure out how to use the GPS module with the Sparkfun u-blox GNSS library when the GPS was used in a shield configuration. The library would simply report that the module could not be found on the default I2C address and changing the address would not help. I also tried changing to using UART (as the Arduino GPS library does in the shield configuration), but this was also unsuccessful. If anyone reading this knows how to get the Sparkfun u-blox library to work when not using the I2C ports, please let me know...
+
+To prevent the connector to loosen due to vibrations a small spot of glue was added to the edge after connecting the cable to the GPS module.
 
 ### ADXL345 Accelerometer
 The following pins are connected between the main board and the accelerometer.
@@ -48,12 +59,15 @@ Pin 12 | SCL
 GND | GND
 VCC | VCC
 
+### Battery
+
+
 ### Sparkfun LiPo Charger Plus
 The positive wire goes through the micro switch to the positive lead on the JST PHR-2 connector that connects to the main board. The negative wire goes directly to the negative lead on the JST PHR-2 connector.
 
 ## Software
 The code for this project is found on Github:
-https://www.github.com/Didgeridoohan/BikeTracker
+https://www.github.com/johan-m-o/BikeTracker
 
 I’m not actually a programmer (and this is my first ever Arduino project), I just like to dabble. As a result, the code might not be very pretty, effective or “correct”, but it works (from what I've seen at least). If you’ve got the time and skill, please feel free to contribute.
 
@@ -63,15 +77,16 @@ The basic features include (a more detailed description follow):
 * Up to 10 days battery time.
 * Movement detection.
 * GPS and GPRS location.
+* Alerts through SMS.
 * Control the device through SMS-commands.
 
 ### Details
-#### Battery
-With regular use the battery should last up to 6 days. This is if the device is on most of the time, but in deep sleep mode. With more activity, the battery will of course last a shorter time.
+#### Running time
+With regular use the battery should last up to 10 days. This is if the device is on most of the time, but in deep sleep mode. With more activity, the battery will of course last a shorter time.
 
 According to the [https://content.arduino.cc/assets/mkr-microchip_samd21_family_full_datasheet-ds40001882d.pdf](SAMD21 data sheet) there's no need to configure unused pins to optimise power consumption (floating pins). Therefore, I haven't bothered with that...
 
-To charge the device I've pulled a small USB extension cable through the case that is accessible even with the device mounted on the bike. A power bank is a handy way of charging the tracker without having to bring the bike to somewhere where you have an outlet (if none is easily accessible where you keep the bike, that is).
+To charge the device I'm using a small USB extension cable that is accessible even with everything mounted on the bike. A power bank is a handy way of charging the tracker without having to bring the bike to somewhere where you have an outlet (if none is easily accessible where you keep the bike, that is).
 
 #### Deep sleep
 To use the least amount of battery, the device will go into deep sleep mode if no movement is registered and no location transmission is active. By default this happens after 5 minutes. In deep sleep mode only movement or the RTC can wake up the device, everything else is shut off or in low power mode. The device will wake up at set times (by default 8:00 and 20:00 o’clock), to transmit the battery level and possibly receive SMS commands (more on that below). If nothing happens within 5 minutes the device goes back to deep sleep.
@@ -172,19 +187,65 @@ When preparing the software for upload to the board, the arduino_secrets.h file 
 ## Mounting on the bike
 I’ve had several different ideas on how to mount the tracker on a bike. Commercial trackers can often be hidden in the handlebars or similar, but the MKR GSM 1400 module can be a bit too wide for that with its 25 millimeters. Other options could be in the seat-post hole or in a case mounted to the frame somewhere.
 
+For version 2.0 of the tracker I have used a combination of putting the tracker inside the frame and on the frame.
+
+### A mix
+For the final iteration of the tracker I've opted to do a mix of hiding the tracker inside the frame and on it. The main board and batteries are inside the seat tube and anything with an antenna is mounted under the saddle.
+
+On my bicycle the seat post is 27 mm in diameter, and the board is 25 mm wide. Perfect. To mount the board inside the post I cut two grooves in the end of the post and made a whole where I could put a bolt and nut to keep the board in place.
+![Seat post groove](/images/seat_post_01.jpg)
+
+It was also necessary to drill a hole at the top of the post, in the saddle mount, to be able to pull cables up to the underside of the saddle.
+![Seat post cable hole](/images/seat_post_02.jpg)
+
+To accomodate the new placement the batteries needed to be placed one after the other, which is why I opted to use two single 18650 Li-Po cell holders that I connected in parallell. The cells were taken from a 4400mAh battery pack, which also meant that I got a battery control circuit for free. Be careful if you're going down this route... Connecting the batteries or control circuit wrong can very easily result in your house burning down. Only attempt this if you know what you're doing. If you don't know what you're doing use ready-made batteries (but these might not fit in a regular battery holder and the charging might work differently).
+![Battery control circuit](/images/battery_circuit.jpg)
+
+Here's a general overview of the circuit before mounting everything.
+![General circiut overview](/images/saddle_overview.jpg)
+
+Getting everything in place wasn't entirely straightforward. The battery holders needed to be cut down to fit inside the seat post and pulling all the cables through took a few tries (using a bent piece of metal wire).
+![Wire management](/images/mounting_wirepull_02.jpg)
+In the above image you can also see that I'm covering up the main board with shrink tube, to protect it when sliding it into the seat post (the same is true for other components, but more on that below).
+![Top of seat post, with wires](/images/mounting_wirepull_01.jpg)
+
+GPS module, charging circuit, GSM antenna and on/off-switch are all mounted under the saddle. For this I made a custom bracket for the antenna and on/off-switch and mounted charging circuit and GPS module in shrink wrap and an old bicycle tube respectively before attaching everything with screws directly to the underside of the saddle (make sure the screws are short enough to not pierce the saddel when you sit on it).
+![Mounting bracket](/images/bracket.jpg)
+![Everything mounted under the saddle](/images/placement.jpg)
+
+Finally everything is covered with a piece of waterproof cloth that I had laying around. The back of the cloth is not attached to allow the charging cable to be pulled out for charging the unit.
+![Covered with waterproof cloth](/images/)
+
+The finished unit is pretty well hidden.
+![The final result](/images/finished_01.jpg)
+In the above image you can also see the accelerometer hanging loose underneath the seat post. This makes it more sensitive to movement. And here's a closeup.
+![The final result - closeup](/images/finished_02.jpg)
+
+#### Advantages
+More difficult to detect, but still very accessible. 
+
+#### Drawbacks
+Since the tracker is integrated into the seat post, simply removing the saddle and seat post would make the tracker useless.
+
 ### Inside the frame
 When hiding the tracker in the frame it’ll be necessary to construct it in a tube-like fashion. All the components need to be laid out in a line and the battery needs to be single-cell or two cells laid out one after the other rather than next to each other.
 
-If the handlebars are wide enough to fit the tracker that’s great. It’ll be easy to access and can be well hidden.
+If the handlebars are wide enough to fit the tracker that’s great. It’ll be relatively easy to access and can be well hidden.
 
-Other options for hiding the tracker inside the frame pretty much only includes under the seat post. But, the tracker will be difficult to get too if it needs to be turned off, charged, updated, etc. Here I have an idea that involves drawing cables from the tracker up through holes drilled in the seat post and then have the power button and charging/data port mounted under the seat. I have not tried this option (yet), and it will take a bit of work, but once completed I think it could be a pretty nice setup with all the parts that need to be accessible hidden under the seat. With this option the only time you would need access to the tracker would be if it needs repairs. Protecting it with some kind of padding would probably be necessary.
+Other options for hiding the tracker inside the frame pretty much only includes in/under the seat post. But, the tracker will be difficult to get too if it needs to be turned off, charged, updated, etc.
 
 One thing to keep in mind when planning to put the tracker inside the frame is the possibly detrimental effect it will have on reception, both for the GSM module and the GPS shield. Putting the antenna inside a metal tube isn’t the best option if you want a strong signal...
+
+#### Advantages
+Well hidden.
+
+#### Drawbacks
+Well hidden. It can be hard to get to the tracker if necessary. Reception migth suffer.
 
 ### On the frame
 If hiding the tracker inside the frame isn’t an option, putting it on the frame somewhere is the only way. Hiding it under the seat might be possible, in some kind of box you bolt/strap to the frame, etc.
 
-I opted for a solution where I merged the box with the mounting holder for my bicycle lock. That way the box kind of looks like it is part of the mount, but it is still easily accessible. For my prototype I used a multipurpose plastic enclosure from Hammond Electronics (1591HBK) that I (heavily) modified to accommodate the lock mount and to also make it somewhat waterproof. It took a lot of cutting, grinding, gluing and swearing, but eventually I got it to work like I want it to (although it's not pretty). If I had access to a 3D-printer I would have designed a more streamlined case that doesn’t stick out like a sore thumb, but that’s for another time.
+For the first version of the tracker (the proof of concept, pretty much) I opted for a solution where I mounted a the tracker on the frame. To make this somewhat hidden I merged the box with the mounting holder for my bicycle lock. That way the box kind of looks like it is part of the mount, but it is still easily accessible. For my prototype I used a multipurpose plastic enclosure from Hammond Electronics (1591HBK) that I (heavily) modified to accommodate the lock mount and to also make it somewhat waterproof. It took a lot of cutting, grinding, gluing and swearing, but eventually I got it to work like I want it to (although it's not pretty). If I had access to a 3D-printer I would have designed a more streamlined case that doesn’t stick out like a sore thumb, but that’s for another time.
 
 Below you see the finished case that I ended up using.
 ![Finished case](/images/case.jpg)
@@ -200,7 +261,11 @@ Lastly, a view of the insides of the case (the main board and the LiPo charger c
 
 The weatherproofing comes from sealing holes and seams with a whole lot of rubber glue and cutting out gaskets for the lid from a bicycle wheel inner tube.
 
-Another possible way to mount everything “on the frame” would be to mount every component separately underneath the saddle and then weatherproof with heat shrink and other plastic wrappings. I need to think about/pursue this option further, but the tracker should at least be easily accessible this way.
+#### Advantages
+The tracker is easily accessible.
+
+#### Drawbacks
+The tracker is easily accessible. When everything is mounted on the frame it is quite easy to find for any would-be thief.
 
 ## Customising alerts
 The SMS alerts are constructed so that you can use an automation tool (like [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.taskerm) or similar) to filter out and create notification sounds for the SMS alerts of your choice. There is a simple [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.taskerm) profile [here](Bike_Tracker_Movement_Alert.prf.xml) that you can use as a base. Sorry iOS people, I'm not quite sure what you could use for the same effect. Maybe ITTT or Workflow?
@@ -210,7 +275,7 @@ An example on how the SMS alerts are constructed is that when movement interrupt
 ## Licence
 MIT License
 
-Copyright (c) 2021 Didgeridoohan
+Copyright (c) 2021 Johan Oscarsson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

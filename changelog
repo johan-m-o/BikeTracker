@@ -3,7 +3,11 @@ Bike Tracker Changelog
 Copyright (c) 2021 Johan Oscarsson
 Released under the MIT licence
 
-Documentation and code: https://www.github.com/Didgeridoohan/BikeTracker
+Documentation and code: https://www.github.com/johan-m-o/BikeTracker
+
+v2.0 - 2021-09-15
+- New and improved mounting on the bike.
+- New home for the repository.
 
 v1.2 - 2021-05-24
 - Battery optimisations: set the GSM modem in low power mode when in deep sleep (forgot about this in the initial release). Gives a battery time of up to 10 days with regular use (increase of 4 days of deep sleep compared to earlier releases).
