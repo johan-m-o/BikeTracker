@@ -30,8 +30,8 @@ A note on the charger listed above:
 While testing the hardware I noticed that the MKR GSM board wouldn’t charge the Li-Po batteries I had, and after some further research I concluded that there was either something wrong with the board or that it simply wasn’t compatible with the batteries I had. Since it was functioning otherwise, and that I didn’t want to spend a lot of time investigating further I decided on using an external charging circuit instead and got the Sparkfun charger. If you make something similar and the MKR GSM board charges your battery, this external charger will of course not be necessary.
 
 ## Wiring
-![Wiring diagram](/images/wiring.png)
-![Closeup of main board](/images/board_closeup.jpg)
+![Wiring diagram](/images/wiring.png)  
+![Closeup of main board](/images/board_closeup.jpg)  
 ### MKR GMS 1400
 I couldn’t find the MKR GSM 1400 without the headers (don't think it's even available without), so those had to be desoldered before anything else could be connected to the board. The headers just take up too much space for them to be kept on there.
 
@@ -190,34 +190,33 @@ For version 2.0 of the tracker I have used a combination of putting the tracker 
 ### A mix
 For the final iteration of the tracker I've opted to do a mix of hiding the tracker inside the frame and on it. The main board and batteries are inside the seat tube and anything with an antenna is mounted under the saddle.
 
-On my bicycle the seat post is 27 mm in diameter, and the board is 25 mm wide. Perfect. To mount the board inside the post I cut two grooves in the end of the post and made a whole where I could put a bolt and nut to keep the board in place.
-![Seat post groove](/images/seat_post_01.jpg)
+On my bicycle the seat post is 27 mm in diameter, and the board is 25 mm wide. Perfect. To mount the board inside the post I cut two grooves in the end of the post and made a whole where I could put a bolt and nut to keep the board in place.  
+![Seat post groove](/images/seat_post_01.jpg)  
 
-It was also necessary to drill a hole at the top of the post, in the saddle mount, to be able to pull cables up to the underside of the saddle.
-![Seat post cable hole](/images/seat_post_02.jpg)
+It was also necessary to drill a hole at the top of the post, in the saddle mount, to be able to pull cables up to the underside of the saddle.  
+![Seat post cable hole](/images/seat_post_02.jpg)  
 
-To accomodate the new placement the batteries needed to be placed one after the other, which is why I opted to use two single 18650 Li-Po cell holders that I connected in parallell. The cells were taken from a 4400mAh battery pack, which also meant that I got a battery control circuit for free. Be careful if you're going down this route... Connecting the batteries or control circuit wrong can very easily result in your house burning down. Only attempt this if you know what you're doing. If you don't know what you're doing use ready-made batteries (but these might not fit in a regular battery holder and the charging might work differently).
-![Battery control circuit](/images/battery_circuit.jpg)
+To accomodate the new placement the batteries needed to be placed one after the other, which is why I opted to use two single 18650 Li-Po cell holders that I connected in parallell. The cells were taken from a 4400mAh battery pack, which also meant that I got a battery control circuit for free. Be careful if you're going down this route... Connecting the batteries or control circuit wrong can very easily result in your house burning down. Only attempt this if you know what you're doing. If you don't know what you're doing use ready-made batteries (but these might not fit in a regular battery holder and the charging might work differently).  
+![Battery control circuit](/images/battery_circuit.jpg)  
 
-Here's a general overview of the circuit before mounting everything.
-![General circiut overview](/images/saddle_overview.jpg)
+Here's a general overview of the circuit before mounting everything.  
+![General circiut overview](/images/saddle_overview.jpg)  
 
-Getting everything in place wasn't entirely straightforward. The battery holders needed to be cut down to fit inside the seat post and pulling all the cables through took a few tries (using a bent piece of metal wire).
-![Wire management](/images/mounting_wirepull_02.jpg)
-In the above image you can also see that I'm covering up the main board with shrink tube, to protect it when sliding it into the seat post (the same is true for other components, but more on that below).
-![Top of seat post, with wires](/images/mounting_wirepull_01.jpg)
+Getting everything in place wasn't entirely straightforward. The battery holders needed to be cut down to fit inside the seat post and pulling all the cables through took a few tries (using a bent piece of metal wire).  
+![Wire management](/images/mounting_wirepull_02.jpg)  
+In the above image you can also see that I'm covering up the main board with shrink tube, to protect it when sliding it into the seat post (the same is true for other components, but more on that below).  
+![Top of seat post, with wires](/images/mounting_wirepull_01.jpg)  
 
-GPS module, charging circuit, GSM antenna and on/off-switch are all mounted under the saddle. For this I made a custom bracket for the antenna and on/off-switch and mounted charging circuit and GPS module in shrink wrap and an old bicycle tube respectively before attaching everything with screws directly to the underside of the saddle (make sure the screws are short enough to not pierce the saddel when you sit on it).
-![Mounting bracket](/images/bracket.jpg)
-![Everything mounted under the saddle](/images/placement.jpg)
+GPS module, charging circuit, GSM antenna and on/off-switch are all mounted under the saddle. For this I made a custom bracket for the antenna and on/off-switch and mounted charging circuit and GPS module in shrink wrap and an old bicycle tube respectively before attaching everything with screws directly to the underside of the saddle (make sure the screws are short enough to not pierce the saddel when you sit on it).  
+![Mounting bracket](/images/bracket.jpg)  
+![Everything mounted under the saddle](/images/placement.jpg)  
 
-Finally everything is covered with a piece of waterproof cloth that I had laying around. The back of the cloth is not attached to allow the charging cable to be pulled out for charging the unit.
-![Covered with waterproof cloth](/images/)
+Finally everything is covered with a piece of waterproof cloth that I had laying around (just to make things a bit more splash proof). The back of the cloth is not attached to allow the charging cable to be pulled out for charging the unit.
 
-The finished unit is pretty well hidden.
-![The final result](/images/finished_01.jpg)
-In the above image you can also see the accelerometer hanging loose underneath the seat post. This makes it more sensitive to movement. And here's a closeup.
-![The final result - closeup](/images/finished_02.jpg)
+The finished unit is pretty well hidden.  
+![The final result](/images/finished_01.jpg)  
+In the above image you can also see the accelerometer hanging loose underneath the seat post. This makes it more sensitive to movement. And here's a closeup.  
+![The final result - closeup](/images/finished_02.jpg)  
 
 #### Advantages
 More difficult to detect, but still very accessible. 
@@ -245,17 +244,17 @@ If hiding the tracker inside the frame isn’t an option, putting it on the fram
 
 For the first version of the tracker (the proof of concept, pretty much) I opted for a solution where I mounted a the tracker on the frame. To make this somewhat hidden I merged the box with the mounting holder for my bicycle lock. That way the box kind of looks like it is part of the mount, but it is still easily accessible. For my prototype I used a multipurpose plastic enclosure from Hammond Electronics (1591HBK) that I (heavily) modified to accommodate the lock mount and to also make it somewhat waterproof. It took a lot of cutting, grinding, gluing and swearing, but eventually I got it to work like I want it to (although it's not pretty). If I had access to a 3D-printer I would have designed a more streamlined case that doesn’t stick out like a sore thumb, but that’s for another time.
 
-Below you see the finished case that I ended up using.
-![Finished case](/images/case.jpg)
+Below you see the finished case that I ended up using.  
+![Finished case](/images/case.jpg)  
 
-Here it is mounted on the bike.
-![Mounted case](/images/case_mounted.jpg)
+Here it is mounted on the bike.  
+![Mounted case](/images/case_mounted.jpg)  
 
-And a comparison with an unmodified bike lock mount.
-![Original lock mount for comparison](/images/case_compare.jpg)
+And a comparison with an unmodified bike lock mount.  
+![Original lock mount for comparison](/images/case_compare.jpg)  
 
-Lastly, a view of the insides of the case (the main board and the LiPo charger can just about be discerned behind the green GSM antenna).
-![Internal wiring and electronics](/images/case_internal.jpg)
+Lastly, a view of the insides of the case (the main board and the LiPo charger can just about be discerned behind the green GSM antenna).  
+![Internal wiring and electronics](/images/case_internal.jpg)  
 
 The weatherproofing comes from sealing holes and seams with a whole lot of rubber glue and cutting out gaskets for the lid from a bicycle wheel inner tube.
 
