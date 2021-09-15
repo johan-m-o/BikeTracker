@@ -197,7 +197,7 @@ It was also necessary to drill a hole at the top of the post, in the saddle moun
 ![Seat post cable hole](/images/seat_post_02.jpg)  
 
 To accomodate the new placement the batteries needed to be placed one after the other, which is why I opted to use two single 18650 Li-Po cell holders that I connected in parallell. The cells were taken from a 4400mAh battery pack, which also meant that I got a battery control circuit for free. Be careful if you're going down this route... Connecting the batteries or control circuit wrong can very easily result in your house burning down. Only attempt this if you know what you're doing. If you don't know what you're doing use ready-made batteries (but these might not fit in a regular battery holder and the charging might work differently).  
-![Battery control circuit](/images/battery_circuit.jpg)  
+![Battery control circuit](/images/battery_curcuit.jpg)  
 
 Here's a general overview of the circuit before mounting everything.  
 ![General circiut overview](/images/saddle_overview.jpg)  
