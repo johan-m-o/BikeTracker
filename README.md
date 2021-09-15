@@ -49,7 +49,8 @@ Since the I2C port had to be removed (see above) the provided I2C cable could no
 To prevent the connector to loosen due to vibrations a small spot of glue was added to the edge after connecting the cable to the GPS module.
 
 ### ADXL345 Accelerometer
-The following pins are connected between the main board and the accelerometer.
+The following pins are connected between the main board and the accelerometer.  
+
 MKR GSM 1400 | ADXL345
 ------------ | -------
 Pin 6 | INT1
@@ -58,9 +59,6 @@ Pin 11 | SDA
 Pin 12 | SCL
 GND | GND
 VCC | VCC
-
-### Battery
-
 
 ### Sparkfun LiPo Charger Plus
 The positive wire goes through the micro switch to the positive lead on the JST PHR-2 connector that connects to the main board. The negative wire goes directly to the negative lead on the JST PHR-2 connector.
