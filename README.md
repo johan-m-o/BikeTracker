@@ -16,8 +16,8 @@ After some research (and trial and error) I ended up with the following hardware
 * SMA to IPX UFL cable (60 cm)
 * ADXL345 3-axis accelerometer
 * Arduino MKR GPS Shield
-* 2 3.7V 2200mAh Li-Po 18650 battery cells
-* 2 single 18650 cell battery holders (taken from 4400mAh battery pack)
+* 2 3.7V 2200mAh Li-Po 18650 battery cells (taken from 4400mAh battery pack)
+* 2 single 18650 cell battery holders
 * Li-Po battery control circuit (taken from 4400mAh battery pack)
 * On-off micro switch
 * Sparkfun LiPo charger plus
