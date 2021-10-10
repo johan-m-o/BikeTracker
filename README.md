@@ -82,7 +82,7 @@ The basic features include (a more detailed description follow):
 #### Running time
 With regular use the battery should last up to 10 days. This is if the device is on most of the time, but in deep sleep mode. With more activity, the battery will of course last a shorter time.
 
-According to the [https://content.arduino.cc/assets/mkr-microchip_samd21_family_full_datasheet-ds40001882d.pdf](SAMD21 data sheet) there's no need to configure unused pins to optimise power consumption (floating pins). Therefore, I haven't bothered with that...
+According to the [SAMD21 data sheet](https://content.arduino.cc/assets/mkr-microchip_samd21_family_full_datasheet-ds40001882d.pdf) there's no need to configure unused pins to optimise power consumption (floating pins). Therefore, I haven't bothered with that...
 
 To charge the device I'm using a small USB extension cable that is accessible even with everything mounted on the bike. A power bank is a handy way of charging the tracker without having to bring the bike to somewhere where you have an outlet (if none is easily accessible where you keep the bike, that is).
 
