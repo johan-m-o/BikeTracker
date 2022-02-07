@@ -9,6 +9,8 @@ So, I needed a microcontroller that I could hook an accelerometer and a GPS to, 
 ## Future
 Currently I'm satisfied with both hardware and software of the tracker. No changes planned for now...
 
+Since 2G and 3G networks are starting to close down around the world I've started looking at alternatives to te MKR GSM 1400 board. Nothing stands out yet, but in my area the close-down won't happen until 2025, so I have some time to research this.
+
 ## Hardware
 After some research (and trial and error) I ended up with the following hardware:
 * Arduino MKR GSM 1400 as the mainboard
