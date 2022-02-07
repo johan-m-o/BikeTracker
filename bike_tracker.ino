@@ -7,7 +7,7 @@
 */
 
 #include <Adafruit_SleepyDog.h>                     // Adafruit Sleepydog Arduino library https://github.com/adafruit/Adafruit_SleepyDog
-#include<ADXL345_WE.h>                              // Wolles Elektronikkiste's ADXL345 accelerometer library https://github.com/wollewald/ADXL345_WE
+#include <ADXL345_WE.h>                              // Wolles Elektronikkiste's ADXL345 accelerometer library https://github.com/wollewald/ADXL345_WE (Tested and working on v2.0.3)
 #include <ArduinoLowPower.h>                        // Arduino Low Power library https://www.arduino.cc/en/Reference/ArduinoLowPower
 #include <MKRGSM.h>                                 // Arduino MKRGSM library https://www.arduino.cc/en/Reference/MKRGSM
 #include <RTCZero.h>                                // Arduino RTC library https://www.arduino.cc/en/Reference/RTC
