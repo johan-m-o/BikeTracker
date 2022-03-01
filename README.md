@@ -1,4 +1,4 @@
-# Bike Tracker v2.0
+# Bike Tracker v2.1
 ## Background
 There are actually plenty of bicycle trackers around, so why make your own? Well, so that it works the way you want it… And it’s fun!
 
@@ -184,6 +184,9 @@ When preparing the software for upload to the board, the arduino_secrets.h file 
 #define SECRET_GPRS_PASSWORD "the APN password"
 ```
 
+### Daylight savings
+The daylight savings function used in the tracker is based on Swedish times. If this doesn't match your region you'll need to update the `DSTcheck()` function with the proper dates.
+
 ## Mounting on the bike
 I’ve had several different ideas on how to mount the tracker on a bike. Commercial trackers can often be hidden in the handlebars or similar, but the MKR GSM 1400 module can be a bit too wide for that with its 25 millimeters. Other options could be in the seat-post hole or in a case mounted to the frame somewhere.
 
@@ -274,7 +277,7 @@ An example on how the SMS alerts are constructed is that when movement interrupt
 ## Licence
 MIT License
 
-Copyright (c) 2021 Johan Oscarsson
+Copyright (c) 2021-2022 Johan Oscarsson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
