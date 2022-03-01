@@ -1,9 +1,12 @@
 Bike Tracker Changelog
 
-Copyright (c) 2021 Johan Oscarsson
+Copyright (c) 2021-2022 Johan Oscarsson
 Released under the MIT licence
 
 Documentation and code: https://www.github.com/johan-m-o/BikeTracker
+
+v2.1 - 2022-03-01
+- Fixed daylight savings
 
 v2.0 - 2021-09-15
 - New and improved mounting on the bike.

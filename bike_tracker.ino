@@ -1,13 +1,13 @@
 /*
-   Bike Tracker v2.0
-   Copyright (c) 2021 Johan Oscarsson
+   Bike Tracker v2.1
+   Copyright (c) 2021-2022 Johan Oscarsson
    Released under the MIT licence
 
    Documentation and code: https://www.github.com/Didgeridoohan/BikeTracker
 */
 
 #include <Adafruit_SleepyDog.h>                     // Adafruit Sleepydog Arduino library https://github.com/adafruit/Adafruit_SleepyDog
-#include <ADXL345_WE.h>                              // Wolles Elektronikkiste's ADXL345 accelerometer library https://github.com/wollewald/ADXL345_WE (Tested and working on v2.0.3)
+#include <ADXL345_WE.h>                             // Wolles Elektronikkiste's ADXL345 accelerometer library https://github.com/wollewald/ADXL345_WE (Tested and working on v2.0.3)
 #include <ArduinoLowPower.h>                        // Arduino Low Power library https://www.arduino.cc/en/Reference/ArduinoLowPower
 #include <MKRGSM.h>                                 // Arduino MKRGSM library https://www.arduino.cc/en/Reference/MKRGSM
 #include <RTCZero.h>                                // Arduino RTC library https://www.arduino.cc/en/Reference/RTC
@@ -515,7 +515,8 @@ byte DSTcheck() { // Calcualte if 1 or 2 hours should be added to the time, depe
   y = 2000 + rtc.getYear();
   m = rtc.getMonth();
   d = rtc.getDay();
-  w = (d += m < 3 ? y-- : y - 2, 23 * m / 9 + d + 4 + y / 4 - y / 100 + y / 400) % 7; // http://stackoverflow.com/a/21235587
+  dCalc = d;
+  w = (dCalc += m < 3 ? y-- : y - 2, 23 * m / 9 + dCalc + 4 + y / 4 - y / 100 + y / 400) % 7; // http://stackoverflow.com/a/21235587
 
   if (m == 3 && d >= 25) { // Daylight savings starts on the last Sunday of March
     item = 2;
