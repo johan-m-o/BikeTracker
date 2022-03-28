@@ -1,4 +1,4 @@
-# Bike Tracker v2.1
+# Bike Tracker v2.2
 ## Background
 There are actually plenty of bicycle trackers around, so why make your own? Well, so that it works the way you want it… And it’s fun!
 

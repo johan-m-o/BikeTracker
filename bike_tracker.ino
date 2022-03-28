@@ -1,5 +1,5 @@
 /*
-   Bike Tracker v2.1
+   Bike Tracker v2.2
    Copyright (c) 2021-2022 Johan Oscarsson
    Released under the MIT licence
 
@@ -458,6 +458,7 @@ unsigned long rtcSet() { // Set RTC time from GSM network
   }
   rtc.setTime(hour(t), minute(t), second(t));
   rtc.setDate(day(t), month(t), 1970 + year(t) - 2);
+  w = weekday(t) - 1; // Compensate weekday for the 1-7 implementation, starting on Sunday (we need 0-6)
   return t;
 }
 
@@ -515,8 +516,6 @@ byte DSTcheck() { // Calcualte if 1 or 2 hours should be added to the time, depe
   y = 2000 + rtc.getYear();
   m = rtc.getMonth();
   d = rtc.getDay();
-  dCalc = d;
-  w = (dCalc += m < 3 ? y-- : y - 2, 23 * m / 9 + dCalc + 4 + y / 4 - y / 100 + y / 400) % 7; // http://stackoverflow.com/a/21235587
 
   if (m == 3 && d >= 25) { // Daylight savings starts on the last Sunday of March
     item = 2;

@@ -5,6 +5,9 @@ Released under the MIT licence
 
 Documentation and code: https://www.github.com/johan-m-o/BikeTracker
 
+v2.2 - 2022-03-28
+- Further daylight savings fixes (forgot some stuff)
+
 v2.1 - 2022-03-01
 - Fixed daylight savings
 
