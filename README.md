@@ -275,7 +275,7 @@ The SMS alerts are constructed so that you can use an automation tool (like [Tas
 An example on how the SMS alerts are constructed is that when movement interrupts a deep sleep cycle the SMS will start with "Waking up", but if the wake-up event is caused by the RTC the message will start with "Scheduled wake-up". This is because you might not want to get a notification sound for a scheduled wake-up, but for a movement triggered wake-up you do.
 
 ## Licence
-Software released under MIT.
+Software released under MIT.  
 Hardware design released under CERN-OHL-P v2.
 
 Copyright (c) 2021-2022 Johan Oscarsson
